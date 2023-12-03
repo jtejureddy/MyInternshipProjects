@@ -1,0 +1,108 @@
+def add_task():
+    while True:
+        task_description = input("Enter task description: ").strip()
+        if task_description == "":
+            print("Task description cannot be empty.")
+            continue
+        else:
+            break
+
+    tasks.append({"description": task_description, "completed": False})
+    print("Task added successfully.")
+
+def mark_task_as_completed():
+    while True:
+        task_index = input("Enter task index to mark as completed: ").strip()
+        if not task_index.isdigit():
+            print("Task index must be a number.")
+            continue
+
+        task_index = int(task_index)
+        if task_index < 0 or task_index >= len(tasks):
+            print("Invalid task index.")
+            continue
+        else:
+            break
+
+    tasks[task_index]["completed"] = True
+    print("Task marked as completed.")
+
+def update_task_description():
+    while True:
+        task_index = input("Enter task index to update description: ").strip()
+        if not task_index.isdigit():
+            print("Task index must be a number.")
+            continue
+
+        task_index = int(task_index)
+        if task_index < 0 or task_index >= len(tasks):
+            print("Invalid task index.")
+            continue
+        else:
+            break
+
+    new_description = input("Enter new task description: ").strip()
+    if new_description == "":
+        print("Task description cannot be empty.")
+        return
+
+    tasks[task_index]["description"] = new_description
+    print("Task description updated successfully.")
+
+def remove_task():
+    while True:
+        task_index = input("Enter task index to remove: ").strip()
+        if not task_index.isdigit():
+            print("Task index must be a number.")
+            continue
+
+        task_index = int(task_index)
+        if task_index < 0 or task_index >= len(tasks):
+            print("Invalid task index.")
+            continue
+        else:
+            break
+
+    tasks.pop(task_index)
+    print("Task removed successfully.")
+
+def display_tasks():
+    for i, task in enumerate(tasks):
+        completion_status = "[COMPLETED]" if task["completed"] else "[PENDING]"
+        print(f"{i + 1}. {task['description']} - {completion_status}")
+
+
+tasks = []
+
+while True:
+    print("\nTo-Do List Application")
+    print("1. Add Task")
+    print("2. Mark Task as Completed")
+    print("3. Update Task Description")
+    print("4. Remove Task")
+    print("5. Display Tasks")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ").strip()
+    if not choice.isdigit():
+        print("Invalid choice.")
+        continue
+
+    choice = int(choice)
+    if choice < 1 or choice > 6:
+        print("Invalid choice.")
+        continue
+
+    if choice == 1:
+        add_task()
+    elif choice == 2:
+        mark_task_as_completed()
+    elif choice == 3:
+        update_task_description()
+    elif choice == 4:
+        remove_task()
+    elif choice == 5:
+        display_tasks()
+    elif choice == 6:
+        print("Exiting application.")
+        break
